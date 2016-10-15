@@ -1,6 +1,7 @@
 pub mod constants;
 pub mod field;
 pub mod solver;
+pub mod strategies;
 
 use constants::SIZE;
 use field::Value;
