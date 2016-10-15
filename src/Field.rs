@@ -29,7 +29,7 @@ pub struct Field {
 }
 
 impl Field {
-    pub fn print(self) {
+    pub fn print(&self) {
         for i in 0..SIZE {
             for j in 0..SIZE {
                 let mut val = 0;

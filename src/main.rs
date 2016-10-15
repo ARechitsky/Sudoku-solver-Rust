@@ -13,6 +13,7 @@ fn main() {
         "006000137900600508025381009102860700600053900390702850009146075460030091013097000",
         "020003000405209000070008532102000000080000020000000304913500040000906803000300070",
         "482700100000043000300100900031000005090000030800000670003004006000370000005009312",
+        "123456780000000000000000000000000000000000000000000000000000000000000000000000000",
     ];
     for rep in str_rep.into_iter() {
         test(rep.to_string())
@@ -22,7 +23,13 @@ fn main() {
 fn test(str_rep: String) {
     let solver = solver::Solver::new(str_rep);
     match solver {
-        Ok(solver) => {
+        Ok(mut solver) => {
+            println!("");
+            println!("=================");
+            println!("");
+            solver.field.print();
+            println!("");
+            solver.solve();
             solver.field.print();
             /*for i in 0..SIZE {
                 for j in 0..SIZE {
@@ -44,6 +51,7 @@ fn test(str_rep: String) {
 fn disp(val: Value) -> i32 {
     match val {
         Value::Yes => 1,
+        Value::No => 2,
         _ => 0
     }
 }
