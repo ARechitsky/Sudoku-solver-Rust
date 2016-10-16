@@ -6,7 +6,6 @@ pub mod solver;
 pub mod strategies;
 pub mod timer;
 
-use constants::SIZE;
 use field::Value;
 use timer::Timer;
 
@@ -24,7 +23,7 @@ fn main() {
         test(rep.to_string())
     }
     timer.stop();
-    println!("Avg time: {:.3} seconds", timer.getTime() / (str_rep.len() as f64))
+    println!("Avg time: {:.3} seconds", timer.get_time() / (str_rep.len() as f64))
 }
 
 fn test(str_rep: String) {

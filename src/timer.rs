@@ -34,7 +34,7 @@ impl Timer {
         self.state = State::Ended
     }
 
-    pub fn getTime(&self) -> f64 {
+    pub fn get_time(&self) -> f64 {
         if self.state != State::Ended { panic!() }
             ((self.end - self.start) as f64) / 1e9
     }

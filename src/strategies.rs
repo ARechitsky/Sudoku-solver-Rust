@@ -1,7 +1,6 @@
 use constants::SIZE;
 use field::*;
 use std::vec::Vec;
-use std::slice::Iter;
 
 pub struct Move {
     pub x: usize,
