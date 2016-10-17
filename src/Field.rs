@@ -1,7 +1,7 @@
 use constants::*;
 use std::slice::Iter;
 use self::CellGroupType::*;
-
+use strategies::Move;
 
 #[derive(Copy, Clone, PartialEq)]
 pub enum Value {
@@ -24,11 +24,25 @@ impl CellGroupType {
     }
 }
 
+#[derive(Clone)]
 pub struct Field {
-    pub data: [[[Value; SIZE]; SIZE]; SIZE]
+    pub data: [[[Value; SIZE]; SIZE]; SIZE],
+    pub empty_cells: usize
 }
 
 impl Field {
+    pub fn new(data: [[[Value; SIZE]; SIZE]; SIZE]) -> Field {
+        let mut empty_cells: usize = 0;
+        for i in 0..SIZE {
+            for j in 0..SIZE {
+                for k in 0..SIZE {
+                    if data[i][j][k] == Value::None { empty_cells += 1 }
+                }
+            }
+        }
+        Field { data: data, empty_cells: empty_cells }
+    }
+
     pub fn print(&self) {
         for i in 0..SIZE {
             for j in 0..SIZE {
@@ -65,4 +79,13 @@ impl Field {
             }
         }
     }
+
+    pub fn apply_move(&mut self, _move: &Move) {
+        if _move.value == Value::None { panic!("Trying to reset cell") }
+        if self.data[_move.x][_move.y][_move.z] != Value::None { return }
+        self.data[_move.x][_move.y][_move.z] = _move.value;
+        self.empty_cells -= 1;
+    }
+
+    pub fn is_done(&self) -> bool { self.empty_cells == 0 }
 }

@@ -2,6 +2,7 @@ use constants::SIZE;
 use field::*;
 use std::vec::Vec;
 
+#[derive(Clone)]
 pub struct Move {
     pub x: usize,
     pub y: usize,
