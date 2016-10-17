@@ -32,11 +32,12 @@ impl Solver {
         while moved {
             moved = false;
             mult_move_group = None;
-            for strategy in BaseStrategy::all() {
+            'strategy: for strategy in BaseStrategy::all() {
                 for move_group in strategy.find_turns(field).iter() {
                     if move_group.len() == 1 {
                         field.apply_move(&move_group[0]);
                         moved = true;
+                        break 'strategy;
                     } else if move_group.len() > 1 &&
                         (mult_move_group.clone().map_or(true, |g: Vec<Move>| g.len() > move_group.len())) {
                         mult_move_group = Some(move_group.clone())
